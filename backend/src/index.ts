@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { Env } from "./config/env.config";
 import { StatusCodes } from "http-status-codes";
+import connectDatabase from "./config/database.config";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get("/health", async (req: Request, res: Response) => {
   });
 });
 
-app.listen(Env.PORT, () => {
+app.listen(Env.PORT, async () => {
+  await connectDatabase();
   console.log(`Server is running on port ${Env.PORT} in ${Env.NODE_ENV} mode`);
 });
