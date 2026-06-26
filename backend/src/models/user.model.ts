@@ -6,6 +6,7 @@ export interface UserDocument extends Document {
   email: string;
   password: string;
   avatar?: string | null;
+  comparePassword(val: string): Promise<boolean>;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -36,7 +37,7 @@ const userSchema = new Schema<UserDocument>(
   },
 );
 
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
   if (this.password && this.isModified("password")) {
     this.password = await hashValue(this.password);
   }
