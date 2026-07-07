@@ -9,6 +9,6 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["src"],
+  "include": ["src","src/**/*.ts", "src/**/*.d.ts"],
   "exclude": ["node_modules", "dist", "test"]
 }
